@@ -1,8 +1,8 @@
 ---
 name: Catalyst-Plugin-Observe
-version: 0.01
+version: 0.02
 author:
-  - Christian Hansen, C<ch@ngmedia.com>
+  - 'Christian Hansen, C<ch@ngmedia.com>'
 abstract: Observe Engine Events
 license: perl
 requires:
@@ -10,5 +10,5 @@ requires:
 provides:
   Catalyst::Plugin::Observe:
     file: lib/Catalyst/Plugin/Observe.pm
-    version: 0.01
+    version: 0.02
 generated_by: Module::Build version 0.26

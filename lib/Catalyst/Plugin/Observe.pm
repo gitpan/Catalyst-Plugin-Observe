@@ -3,7 +3,7 @@ package Catalyst::Plugin::Observe;
 use strict;
 use base 'Class::Publisher';
 
-our $VERSION='0.01';
+our $VERSION='0.02';
 
 {
     my @observable = qw[
@@ -52,17 +52,40 @@ Catalyst::Plugin::Observe - Observe Engine Events
 
     use Catalyst qw[Observe];
 
+    # register the observer method as a callback to prepare_path
     MyApp->add_subscriber( 'prepare_path', \&observer );
 
+    # write callback to describe what happened
     sub observer {
         my ( $c, $event, @args ) = @_;
-        printf( "observed : %s\n", $event );
+        $c->log->info( "observed " . $event . " with arguments " . join( '\n', @args ) );
     }
 
 
 =head1 DESCRIPTION
 
-Observe Engine events.
+Observe Engine events, for debugging purposes. Subclasses
+L<Class::Publisher>.
+
+C<Catalyst::Plugin::Observe> allows you to register your own callbacks
+to specific Engine events (method calls), and to be notified through the
+callback when they occur. When the Engine calls the event, your callback
+will be called with the same arguments, which you can then display (etc.)
+as necessary.
+
+=head1 CALLBACK VARIABLES
+
+=over 4
+
+=item C<$event>
+
+The Engine event to which the callback is registered. See L</OBSERVABLE EVENTS> below.
+
+=item C<@args>
+
+The arguments passed to the Engine event.
+
+=back
 
 =head1 OBSERVABLE EVENTS
 
